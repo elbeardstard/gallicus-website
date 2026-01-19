@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Gallicus - Brasserie Artisanale",
+    "description": "Brasserie artisanale située à Gatineau, Québec. Découvrez nos bières de microbrasserie, brassées avec passion."
+  },
+  "nav": {
+    "about": "À propos",
+    "beers": "Nos bières",
+    "newReleases": "Nouveautés",
+    "findUs": "Où trouver",
+    "contact": "Contact"
+  },
+  "hero": {
+    "tagline": "Brasserie artisanale",
+    "location": "Gatineau, QC",
+    "scrollDown": "Défiler"
+  },
+  "about": {
+    "title": "À propos",
+    "subtitle": "Brasserie artisanale",
+    "description": "Gallicus est une brasserie artisanale située à Gatineau, au Québec. Nous brassons des bières de caractère avec passion et créativité, en petits lots pour garantir la qualité et la fraîcheur de chaque produit.",
+    "philosophy": "Notre philosophie est simple : créer des bières authentiques qui reflètent notre terroir et notre amour du métier. Chaque recette est développée avec soin, utilisant des ingrédients de qualité pour offrir des saveurs uniques et mémorables."
+  },
+  "beers": {
+    "title": "Nos bières",
+    "filterAll": "Toutes",
+    "filterCore": "Classiques",
+    "filterSeasonal": "Saisonnières",
+    "abv": "alc./vol.",
+    "viewDetails": "Voir détails",
+    "emptyState": "Aucune bière disponible pour le moment."
+  },
+  "newReleases": {
+    "title": "Nouveautés",
+    "subtitle": "Nos dernières créations",
+    "viewOnUntappd": "Voir sur Untappd",
+    "rating": "Note"
+  },
+  "findUs": {
+    "title": "Où trouver nos bières",
+    "subtitle": "Points de vente",
+    "viewMap": "Voir la carte",
+    "viewList": "Voir la liste",
+    "types": {
+      "bar": "Bar",
+      "retail": "Détaillant",
+      "restaurant": "Restaurant"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Restons en contact",
+    "form": {
+      "name": "Nom",
+      "email": "Courriel",
+      "message": "Message",
+      "submit": "Envoyer",
+      "sending": "Envoi en cours...",
+      "success": "Message envoyé avec succès!",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "info": {
+      "address": "Adresse",
+      "email": "Courriel",
+      "phone": "Téléphone",
+      "hours": "Heures d'ouverture"
+    }
+  },
+  "footer": {
+    "rights": "Tous droits réservés",
+    "backToTop": "Retour en haut",
+    "followUs": "Suivez-nous"
+  },
+  "common": {
+    "learnMore": "En savoir plus",
+    "close": "Fermer",
+    "loading": "Chargement..."
+  }
+}
