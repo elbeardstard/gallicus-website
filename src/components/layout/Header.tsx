@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 const navItems = [
   { href: "#about", key: "about" },
@@ -22,7 +21,6 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Track scroll position for header styling
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -31,7 +29,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu on scroll
   useEffect(() => {
     const handleScroll = () => {
       if (isMenuOpen) setIsMenuOpen(false);
@@ -40,12 +37,23 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMenuOpen]);
 
-  // Smooth scroll to section
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
-      const headerOffset = 80;
+      const headerOffset = 60;
       const elementPosition = target.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - headerOffset;
       window.scrollTo({ top: offsetPosition, behavior: "smooth" });
@@ -54,63 +62,42 @@ export default function Header() {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-sm"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container-narrow">
-        <nav className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            className={`transition-colors ${
-              isScrolled ? "text-foreground" : "text-white"
-            }`}
-          >
-            <Image
-              src="/images/logo/gallicus-horizontalwide.png"
-              alt="Gallicus"
-              width={160}
-              height={40}
-              className={`h-7 md:h-9 w-auto transition-all duration-300 ${
-                isScrolled ? "" : "invert"
-              }`}
-              priority
-            />
-          </a>
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? "bg-background/90 backdrop-blur-sm"
+            : "bg-gradient-to-b from-black/40 to-transparent"
+        }`}
+      >
+        <nav className="px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-12 sm:h-14">
+            {/* Desktop Navigation - centered */}
+            <div className="hidden md:flex items-center gap-8 lg:gap-10 flex-1 justify-center">
+              {navItems.map((item) => (
+                <a
+                  key={item.key}
+                  href={item.href}
+                  onClick={(e) => scrollToSection(e, item.href)}
+                  className={`font-heading text-[11px] uppercase tracking-[0.15em] transition-all duration-300 hover:text-turquoise ${
+                    isScrolled
+                      ? "text-foreground/70 hover:text-foreground"
+                      : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  {t(item.key)}
+                </a>
+              ))}
+            </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.key}
-                href={item.href}
-                onClick={(e) => scrollToSection(e, item.href)}
-                className={`font-heading text-xs lg:text-sm uppercase tracking-wider transition-colors hover:text-turquoise ${
-                  isScrolled ? "text-foreground" : "text-white"
-                }`}
-              >
-                {t(item.key)}
-              </a>
-            ))}
-          </div>
-
-          {/* Language Toggle + Mobile Menu Button */}
-          <div className="flex items-center gap-3">
+            {/* Language Toggle - desktop: absolute right, mobile: left */}
             <Link
               href={pathname}
               locale={otherLocale}
-              className={`font-heading text-xs uppercase tracking-wider border px-3 py-1.5 transition-all ${
+              className={`md:absolute md:right-6 lg:right-8 font-heading text-[10px] uppercase tracking-[0.15em] px-2.5 py-1 border transition-all duration-300 ${
                 isScrolled
-                  ? "border-foreground text-foreground hover:bg-foreground hover:text-background"
-                  : "border-white text-white hover:bg-white hover:text-foreground"
+                  ? "border-foreground/20 text-foreground/60 hover:border-foreground hover:text-foreground"
+                  : "border-white/30 text-white/70 hover:border-white hover:text-white"
               }`}
             >
               {otherLocale.toUpperCase()}
@@ -119,51 +106,64 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`md:hidden p-2 transition-colors ${
+              className={`md:hidden p-2 -mr-2 transition-colors ${
                 isScrolled ? "text-foreground" : "text-white"
               }`}
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
-              <div className="w-6 h-5 flex flex-col justify-between">
+              <div className="w-5 h-4 flex flex-col justify-between">
                 <span
-                  className={`block h-0.5 transition-all origin-center ${
+                  className={`block h-px transition-all duration-300 origin-center ${
                     isScrolled ? "bg-foreground" : "bg-white"
-                  } ${isMenuOpen ? "rotate-45 translate-y-2" : ""}`}
+                  } ${isMenuOpen ? "rotate-45 translate-y-[7.5px]" : ""}`}
                 />
                 <span
-                  className={`block h-0.5 transition-opacity ${
+                  className={`block h-px transition-all duration-300 ${
                     isScrolled ? "bg-foreground" : "bg-white"
-                  } ${isMenuOpen ? "opacity-0" : ""}`}
+                  } ${isMenuOpen ? "opacity-0 scale-x-0" : ""}`}
                 />
                 <span
-                  className={`block h-0.5 transition-all origin-center ${
+                  className={`block h-px transition-all duration-300 origin-center ${
                     isScrolled ? "bg-foreground" : "bg-white"
-                  } ${isMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+                  } ${isMenuOpen ? "-rotate-45 -translate-y-[7.5px]" : ""}`}
                 />
               </div>
             </button>
           </div>
         </nav>
+      </header>
 
-        {/* Mobile Navigation */}
+      {/* Mobile Navigation Overlay */}
+      <div
+        className={`md:hidden fixed inset-0 z-40 transition-all duration-300 ${
+          isMenuOpen ? "visible" : "invisible"
+        }`}
+      >
+        {/* Backdrop */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${
-            isMenuOpen ? "max-h-96 pb-6" : "max-h-0"
+          className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+            isMenuOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={() => setIsMenuOpen(false)}
+        />
+
+        {/* Menu */}
+        <div
+          className={`absolute top-12 left-0 right-0 bg-background border-b border-foreground/10 transition-all duration-300 ${
+            isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
           }`}
         >
-          <div
-            className={`flex flex-col gap-4 pt-4 border-t ${
-              isScrolled ? "border-foreground/10" : "border-white/20"
-            }`}
-          >
-            {navItems.map((item) => (
+          <div className="flex flex-col py-6 px-6">
+            {navItems.map((item, index) => (
               <a
                 key={item.key}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
-                className={`font-heading text-lg uppercase tracking-wider transition-colors hover:text-turquoise ${
-                  isScrolled ? "text-foreground" : "text-white"
-                }`}
+                className="font-heading text-base uppercase tracking-[0.15em] py-4 text-foreground/80 hover:text-turquoise transition-colors border-b border-foreground/5 last:border-0"
+                style={{
+                  transitionDelay: isMenuOpen ? `${index * 50}ms` : "0ms"
+                }}
               >
                 {t(item.key)}
               </a>
@@ -171,6 +171,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
