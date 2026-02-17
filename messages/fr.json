@@ -13,22 +13,77 @@
   "hero": {
     "tagline": "Brasserie artisanale",
     "location": "Gatineau, QC",
-    "scrollDown": "Défiler"
+    "scrollDown": "Défiler",
+    "cta": "Découvrir nos bières"
   },
   "about": {
     "title": "À propos",
     "subtitle": "Brasserie artisanale",
     "description": "Gallicus est une brasserie artisanale située à Gatineau, au Québec. Nous brassons des bières de caractère avec passion et créativité, en petits lots pour garantir la qualité et la fraîcheur de chaque produit.",
-    "philosophy": "Notre philosophie est simple : créer des bières authentiques qui reflètent notre terroir et notre amour du métier. Chaque recette est développée avec soin, utilisant des ingrédients de qualité pour offrir des saveurs uniques et mémorables."
+    "philosophy": "Notre philosophie est simple : créer des bières authentiques qui reflètent notre terroir et notre amour du métier. Chaque recette est développée avec soin, utilisant des ingrédients de qualité pour offrir des saveurs uniques et mémorables.",
+    "stats": {
+      "founded": "Fondée",
+      "craft": "Artisanale",
+      "location": "Gatineau"
+    },
+    "italicLine": "notre histoire"
   },
   "beers": {
     "title": "Nos bières",
+    "subtitle": "Nos créations",
     "filterAll": "Toutes",
     "filterCore": "Classiques",
     "filterSeasonal": "Saisonnières",
     "abv": "alc./vol.",
     "viewDetails": "Voir détails",
-    "emptyState": "Aucune bière disponible pour le moment."
+    "emptyState": "Aucune bière disponible pour le moment.",
+    "featured": "Vedette",
+    "core": "Classique",
+    "viewOnUntappd": "Voir sur Untappd",
+    "viewAll": "Voir toutes nos bières",
+    "viewAllSub": "Nouveautés, notes et check-ins",
+    "beers": [
+      {
+        "id": "1",
+        "description": "Double NEIPA houblonnée avec Amarillo, Simcoe, Chinook et Idaho 7. Une belle complexité aromatique de fruits tropicaux.",
+        "tastingNotes": [
+          "Tropical",
+          "Mangue",
+          "Fruits de la passion",
+          "Doux"
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Notre lager mexicaine légère et rafraîchissante. Parfaite pour les journées chaudes ou pour accompagner vos tacos.",
+        "tastingNotes": [
+          "Céréale",
+          "Citron",
+          "Légère",
+          "Rafraîchissante"
+        ]
+      },
+      {
+        "id": "3",
+        "description": "West Coast IPA houblonnée au Mosaic, Centennial, Columbus et Nugget. Sèche avec des arômes fruités et résineux.",
+        "tastingNotes": [
+          "Résineux",
+          "Agrumes",
+          "Pin",
+          "Amer"
+        ]
+      },
+      {
+        "id": "4",
+        "description": "Notre IPA signature aux notes tropicales et résineuses. Une amertume bien balancée avec une finale sèche.",
+        "tastingNotes": [
+          "Tropical",
+          "Résineux",
+          "Floral",
+          "Amer"
+        ]
+      }
+    ]
   },
   "newReleases": {
     "title": "Nouveautés",
@@ -41,7 +96,15 @@
     "subtitle": "Points de vente",
     "viewMap": "Voir la carte",
     "viewList": "Voir la liste",
+    "mapLegend": "Légende",
+    "taproom": "Salon de dégustation",
+    "brewerName": "Gallicus - Brasserie Artisanale",
+    "hours": "Ouvert : Jeudi - Dimanche",
+    "directions": "Itinéraire",
+    "pivohubDesc": "Trouvez nos bières près de chez vous",
+    "untappdDesc": "Check-ins et avis de la communauté",
     "types": {
+      "brewery": "Brasserie",
       "bar": "Bar",
       "retail": "Détaillant",
       "restaurant": "Restaurant"
@@ -67,6 +130,7 @@
     }
   },
   "footer": {
+    "tagline": "Brasserie Artisanale",
     "rights": "Tous droits réservés",
     "backToTop": "Retour en haut",
     "followUs": "Suivez-nous"

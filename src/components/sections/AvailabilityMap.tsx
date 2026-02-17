@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { ScrollReveal } from "@/components/ui";
+import { ScrollReveal, RetailersMap } from "@/components/ui";
 
 export default function AvailabilityMap() {
   const t = useTranslations("findUs");
@@ -27,23 +27,36 @@ export default function AvailabilityMap() {
           </div>
         </ScrollReveal>
 
+        {/* Interactive Map — not wrapped in ScrollReveal to ensure correct Mapbox sizing */}
+        <div className="mb-10 overflow-hidden border border-foreground/5">
+          <RetailersMap
+            legend={t("mapLegend")}
+            typeLabels={{
+              brewery: t("types.brewery"),
+              bar: t("types.bar"),
+              retail: t("types.retail"),
+              restaurant: t("types.restaurant"),
+            }}
+          />
+        </div>
+
         {/* Brewery Card */}
-        <ScrollReveal variant="fadeUp" delay={0.1}>
+        <ScrollReveal variant="fadeUp" delay={0.15}>
           <div className="bg-foreground text-background p-8 md:p-12 mb-10">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
               <div>
                 <span className="inline-block bg-turquoise text-white font-heading text-[10px] uppercase tracking-[0.15em] px-3 py-1.5 mb-5">
-                  Salon de dégustation
+                  {t("taproom")}
                 </span>
                 <h3 className="font-heading text-2xl md:text-3xl font-bold mb-3">
-                  Gallicus - Brasserie Artisanale
+                  {t("brewerName")}
                 </h3>
                 <p className="text-background/60 text-sm mb-1">670 rue Auguste-Mondoux #4</p>
                 <p className="text-background/60 text-sm mb-5">Gatineau, QC</p>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-turquoise" />
                   <p className="text-xs text-turquoise font-heading uppercase tracking-[0.15em]">
-                    Ouvert: Jeudi - Dimanche
+                    {t("hours")}
                   </p>
                 </div>
               </div>
@@ -58,7 +71,7 @@ export default function AvailabilityMap() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  Itinéraire
+                  {t("directions")}
                 </a>
               </div>
             </div>
@@ -85,7 +98,7 @@ export default function AvailabilityMap() {
                   PivoHub
                 </h3>
                 <p className="text-xs text-foreground/50">
-                  Trouvez nos bières près de chez vous
+                  {t("pivohubDesc")}
                 </p>
               </div>
               <svg className="w-4 h-4 text-foreground/20 group-hover:text-turquoise group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,7 +129,7 @@ export default function AvailabilityMap() {
                   Untappd
                 </h3>
                 <p className="text-xs text-foreground/50">
-                  Check-ins et avis de la communauté
+                  {t("untappdDesc")}
                 </p>
               </div>
               <svg className="w-4 h-4 text-foreground/20 group-hover:text-turquoise group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">

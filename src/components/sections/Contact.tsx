@@ -6,6 +6,7 @@ import { ScrollReveal } from "@/components/ui";
 
 export default function Contact() {
   const t = useTranslations("contact");
+  const tFooter = useTranslations("footer");
   const [formState, setFormState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
     name: "",
@@ -79,7 +80,7 @@ export default function Contact() {
 
               <div>
                 <h3 className="font-heading text-[10px] uppercase tracking-[0.2em] text-foreground/40 mb-2">
-                  Suivez-nous
+                  {tFooter("followUs")}
                 </h3>
                 <a
                   href="https://instagram.com/brasserie_gallicus"
@@ -164,7 +165,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={formState === "sending"}
-                className="w-full font-heading text-xs uppercase tracking-[0.15em] bg-foreground text-background px-8 py-4 hover:bg-turquoise transition-colors duration-300 disabled:opacity-50 mt-2"
+                className="w-full font-heading text-xs uppercase tracking-[0.15em] bg-foreground text-background px-8 py-4 hover:bg-turquoise active:scale-[0.98] transition-all duration-200 disabled:opacity-50 mt-2"
               >
                 {formState === "sending" ? t("form.sending") : t("form.submit")}
               </button>

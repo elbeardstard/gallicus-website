@@ -28,7 +28,7 @@ export default function Footer() {
               <div>
                 <p className="font-heading text-xl tracking-wider">GALLICUS</p>
                 <p className="text-background/60 text-xs tracking-widest uppercase">
-                  Brasserie Artisanale
+                  {t("tagline")}
                 </p>
               </div>
             </div>

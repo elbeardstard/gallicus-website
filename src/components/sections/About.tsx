@@ -28,6 +28,9 @@ export default function About() {
               <p className="font-heading text-xs uppercase tracking-[0.2em] text-turquoise mb-4">
                 {t("subtitle")}
               </p>
+              <p className="font-display-italic text-3xl md:text-4xl text-foreground/30 mb-2 leading-none">
+                {t("italicLine")}
+              </p>
               <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[0.95]">
                 {t("title")}
               </h2>
@@ -60,7 +63,7 @@ export default function About() {
                   2020
                 </p>
                 <p className="mt-3 font-heading text-[10px] md:text-xs uppercase tracking-[0.2em] text-foreground/60">
-                  Fondée
+                  {t("stats.founded")}
                 </p>
               </div>
             </ScrollReveal>
@@ -70,7 +73,7 @@ export default function About() {
                   100%
                 </p>
                 <p className="mt-3 font-heading text-[10px] md:text-xs uppercase tracking-[0.2em] text-foreground/60">
-                  Artisanale
+                  {t("stats.craft")}
                 </p>
               </div>
             </ScrollReveal>
@@ -80,7 +83,7 @@ export default function About() {
                   QC
                 </p>
                 <p className="mt-3 font-heading text-[10px] md:text-xs uppercase tracking-[0.2em] text-foreground/60">
-                  Gatineau
+                  {t("stats.location")}
                 </p>
               </div>
             </ScrollReveal>

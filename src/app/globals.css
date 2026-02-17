@@ -84,6 +84,20 @@ button {
   transition: all 150ms ease;
 }
 
+/* Focus ring — accessible, on-brand */
+:focus-visible {
+  outline: 2px solid var(--color-turquoise);
+  outline-offset: 3px;
+}
+
+/* Serif italic display utility */
+.font-display-italic {
+  font-family: var(--font-crimson), Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
 /* Selection */
 ::selection {
   background: var(--color-turquoise);

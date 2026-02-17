@@ -4,17 +4,13 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { BeerCard, ScrollReveal } from "@/components/ui";
 
-// Core classics - always available
-const beers = [
+// Static beer data — names, styles, ABV, images, URLs don't change by locale
+const beerBase = [
   {
     id: "1",
     name: "Double Aura",
     style: "IPA - New England / Hazy",
     abv: 7.8,
-    ibu: 24,
-    rating: 4.0,
-    description:
-      "Double NEIPA houblonnée avec Amarillo, Simcoe, Chinook et Idaho 7. Une belle complexité aromatique de fruits tropicaux.",
     image: "https://assets.untappd.com/site/beer_logos/beer-3683191_cf7dc_sm.jpeg",
     isCore: true,
     isFeatured: true,
@@ -25,9 +21,6 @@ const beers = [
     name: "Lucha Libre",
     style: "Lager - Mexican",
     abv: 4.0,
-    rating: 3.68,
-    description:
-      "Notre lager mexicaine légère et rafraîchissante. Parfaite pour les journées chaudes ou pour accompagner vos tacos.",
     image: null,
     isCore: true,
     isFeatured: false,
@@ -38,9 +31,6 @@ const beers = [
     name: "Syn",
     style: "West Coast IPA",
     abv: 6.5,
-    rating: 3.74,
-    description:
-      "West Coast IPA houblonnée au Mosaic, Centennial, Columbus et Nugget. Sèche avec des arômes fruités et résineux.",
     image: "/images/labels/syn.png",
     isCore: true,
     isFeatured: true,
@@ -51,9 +41,6 @@ const beers = [
     name: "IPA",
     style: "IPA Nord-Américaine",
     abv: 6.5,
-    rating: 3.85,
-    description:
-      "Notre IPA signature aux notes tropicales et résineuses. Une amertume bien balancée avec une finale sèche.",
     image: "/images/labels/ipa.png",
     isCore: true,
     isFeatured: true,
@@ -64,6 +51,13 @@ const beers = [
 export default function Products() {
   const t = useTranslations("beers");
 
+  // Merge static data with translated descriptions and tasting notes
+  const beers = beerBase.map((beer, i) => ({
+    ...beer,
+    description: t(`beers.${i}.description`),
+    tastingNotes: [0, 1, 2, 3].map((j) => t(`beers.${i}.tastingNotes.${j}`)),
+  }));
+
   return (
     <section id="beers" className="section bg-background">
       <div className="container-narrow">
@@ -71,7 +65,7 @@ export default function Products() {
         <ScrollReveal variant="fadeUp">
           <div className="text-center mb-14 md:mb-20">
             <p className="font-heading text-xs uppercase tracking-[0.2em] text-turquoise mb-4">
-              Nos créations
+              {t("subtitle")}
             </p>
             <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold">
               {t("title")}
@@ -84,7 +78,7 @@ export default function Products() {
           </div>
         </ScrollReveal>
 
-        {/* Beer Grid - 2x2 for classics */}
+        {/* Beer Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           {beers.map((beer, index) => (
             <ScrollReveal key={beer.id} variant="fadeUp" delay={index * 0.1}>
@@ -93,7 +87,7 @@ export default function Products() {
           ))}
         </div>
 
-        {/* Untappd CTA with logo */}
+        {/* Untappd CTA */}
         <ScrollReveal variant="fadeUp" delay={0.2}>
           <div className="mt-16 md:mt-20 text-center">
             <a
@@ -111,10 +105,10 @@ export default function Products() {
               />
               <div className="text-left">
                 <p className="font-heading text-sm uppercase tracking-[0.1em] group-hover:text-turquoise transition-colors">
-                  Voir toutes nos bières
+                  {t("viewAll")}
                 </p>
                 <p className="text-xs text-foreground/50 mt-0.5">
-                  Nouveautés, notes et check-ins
+                  {t("viewAllSub")}
                 </p>
               </div>
               <svg className="w-4 h-4 text-foreground/30 group-hover:text-turquoise group-hover:translate-x-1 transition-all ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
