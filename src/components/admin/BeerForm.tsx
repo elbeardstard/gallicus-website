@@ -34,7 +34,7 @@ function TagInput({
         {values.map((v) => (
           <span
             key={v}
-            className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.1em] px-2.5 py-1 bg-[#56a899]/15 text-[#56a899] border border-[#56a899]/30"
+            className="admin-tag-accent inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.1em] px-2.5 py-1"
           >
             {v}
             <button
@@ -59,12 +59,12 @@ function TagInput({
             }
           }}
           placeholder={placeholder ?? "Ajouter... (Entrée)"}
-          className="flex-1 px-3 py-2 bg-white/5 border border-white/10 text-white text-sm focus:border-[#56a899] focus:outline-none"
+          className="admin-input flex-1 px-3 py-2 text-sm"
         />
         <button
           type="button"
           onClick={add}
-          className="px-3 py-2 bg-white/5 border border-white/10 text-white/60 hover:text-white text-sm"
+          className="admin-btn-secondary px-3 py-2 text-sm"
         >
           +
         </button>
@@ -159,15 +159,14 @@ export default function BeerForm({ beer }: BeerFormProps) {
     }
   };
 
-  const inputClass =
-    "w-full px-3 py-2.5 bg-white/5 border border-white/10 text-white text-sm focus:border-[#56a899] focus:outline-none transition-colors";
-  const labelClass = "block text-[10px] uppercase tracking-[0.15em] text-white/40 mb-1.5";
+  const inputClass = "admin-input w-full px-3 py-2.5 text-sm";
+  const labelClass = "admin-label block text-[10px] uppercase tracking-[0.15em] mb-1.5";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl">
       {/* Universal fields */}
-      <div className="bg-[#1a1a1a] border border-white/5 p-6 space-y-5">
-        <h2 className="text-xs uppercase tracking-[0.2em] text-white/30 mb-4">Informations générales</h2>
+      <div className="admin-card p-6 space-y-5">
+        <h2 className="admin-section-heading text-xs uppercase tracking-[0.2em] mb-4">Informations générales</h2>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -226,7 +225,7 @@ export default function BeerForm({ beer }: BeerFormProps) {
               onChange={(e) => set("is_core", e.target.checked)}
               className="accent-[#56a899]"
             />
-            <span className="text-sm text-white/70">Classique</span>
+            <span className="admin-text-muted text-sm">Classique</span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -235,14 +234,14 @@ export default function BeerForm({ beer }: BeerFormProps) {
               onChange={(e) => set("is_featured", e.target.checked)}
               className="accent-[#56a899]"
             />
-            <span className="text-sm text-white/70">Vedette</span>
+            <span className="admin-text-muted text-sm">Vedette</span>
           </label>
         </div>
       </div>
 
       {/* Image */}
-      <div className="bg-[#1a1a1a] border border-white/5 p-6">
-        <h2 className="text-xs uppercase tracking-[0.2em] text-white/30 mb-4">Image</h2>
+      <div className="admin-card p-6">
+        <h2 className="admin-section-heading text-xs uppercase tracking-[0.2em] mb-4">Image</h2>
         {form.image_url && (
           <div className="mb-4">
             <Image
@@ -250,7 +249,7 @@ export default function BeerForm({ beer }: BeerFormProps) {
               alt="Aperçu"
               width={100}
               height={100}
-              className="w-24 h-24 object-cover border border-white/10"
+              className="w-24 h-24 object-cover admin-img-border"
             />
           </div>
         )}
@@ -262,7 +261,7 @@ export default function BeerForm({ beer }: BeerFormProps) {
               accept="image/jpeg,image/png,image/webp"
               onChange={handleImageUpload}
               disabled={uploadingImage}
-              className="text-sm text-white/60 file:mr-3 file:py-2 file:px-4 file:bg-white/10 file:border-0 file:text-white file:text-xs file:uppercase file:tracking-wider hover:file:bg-white/20 cursor-pointer"
+              className="admin-file-input text-sm cursor-pointer"
             />
             {uploadingImage && <p className="text-[#56a899] text-xs mt-2">Téléversement...</p>}
           </div>
@@ -281,18 +280,16 @@ export default function BeerForm({ beer }: BeerFormProps) {
       </div>
 
       {/* Bilingual fields */}
-      <div className="bg-[#1a1a1a] border border-white/5 p-6">
+      <div className="admin-card p-6">
         {/* Language tabs */}
-        <div className="flex gap-0 mb-6 border-b border-white/10">
+        <div className="flex gap-0 mb-6 admin-divider border-b">
           {(["fr", "en"] as const).map((l) => (
             <button
               key={l}
               type="button"
               onClick={() => setLang(l)}
               className={`px-5 py-2.5 text-xs uppercase tracking-[0.15em] border-b-2 -mb-px transition-colors ${
-                lang === l
-                  ? "border-[#56a899] text-[#56a899]"
-                  : "border-transparent text-white/40 hover:text-white"
+                lang === l ? "admin-tab-active" : "admin-tab-inactive"
               }`}
             >
               {l === "fr" ? "Français" : "English"}
@@ -347,14 +344,14 @@ export default function BeerForm({ beer }: BeerFormProps) {
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-3 bg-[#56a899] text-white text-xs uppercase tracking-[0.15em] hover:bg-[#4a9488] disabled:opacity-40 transition-colors"
+          className="admin-btn-primary px-6 py-3 text-xs uppercase tracking-[0.15em]"
         >
           {saving ? "Sauvegarde..." : isEdit ? "Mettre à jour" : "Créer la bière"}
         </button>
         <button
           type="button"
           onClick={() => router.push("/admin/beers")}
-          className="px-6 py-3 bg-white/5 text-white/60 text-xs uppercase tracking-[0.15em] hover:bg-white/10 transition-colors"
+          className="admin-btn-secondary px-6 py-3 text-xs uppercase tracking-[0.15em]"
         >
           Annuler
         </button>

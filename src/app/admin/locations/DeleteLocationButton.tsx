@@ -23,7 +23,7 @@ export default function DeleteLocationButton({ id, name }: { id: string; name: s
         </button>
         <button
           onClick={() => setConfirming(false)}
-          className="px-3 py-1.5 text-xs text-white/60 bg-white/5 hover:bg-white/10 transition-colors"
+          className="admin-btn-ghost px-3 py-1.5 text-xs transition-colors"
         >
           Annuler
         </button>
@@ -35,7 +35,7 @@ export default function DeleteLocationButton({ id, name }: { id: string; name: s
     <button
       onClick={() => setConfirming(true)}
       title={`Supprimer ${name}`}
-      className="px-3 py-1.5 text-xs text-red-400/60 hover:text-red-400 bg-white/5 hover:bg-red-500/10 transition-colors"
+      className="admin-btn-delete px-3 py-1.5 text-xs transition-colors"
     >
       ✕
     </button>

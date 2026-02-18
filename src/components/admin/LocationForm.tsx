@@ -71,13 +71,12 @@ export default function LocationForm({ location }: LocationFormProps) {
     }
   };
 
-  const inputClass =
-    "w-full px-3 py-2.5 bg-white/5 border border-white/10 text-white text-sm focus:border-[#56a899] focus:outline-none transition-colors";
-  const labelClass = "block text-[10px] uppercase tracking-[0.15em] text-white/40 mb-1.5";
+  const inputClass = "admin-input w-full px-3 py-2.5 text-sm";
+  const labelClass = "admin-label block text-[10px] uppercase tracking-[0.15em] mb-1.5";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-xl">
-      <div className="bg-[#1a1a1a] border border-white/5 p-6 space-y-5">
+      <div className="admin-card p-6 space-y-5">
         <div>
           <label className={labelClass}>Nom</label>
           <input
@@ -117,7 +116,7 @@ export default function LocationForm({ location }: LocationFormProps) {
             <select
               value={form.type}
               onChange={(e) => set("type", e.target.value)}
-              className={`${inputClass} bg-[#0f0f0f]`}
+              className={inputClass}
             >
               {TYPE_OPTIONS.map(({ value, label }) => (
                 <option key={value} value={value}>
@@ -155,7 +154,7 @@ export default function LocationForm({ location }: LocationFormProps) {
           </div>
         </div>
 
-        <p className="text-white/25 text-xs">
+        <p className="admin-text-faint text-xs">
           💡 Pour obtenir les coordonnées : clic droit sur Google Maps → &quot;Plus d&apos;infos sur cet endroit&quot;
         </p>
 
@@ -177,14 +176,14 @@ export default function LocationForm({ location }: LocationFormProps) {
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-3 bg-[#56a899] text-white text-xs uppercase tracking-[0.15em] hover:bg-[#4a9488] disabled:opacity-40 transition-colors"
+          className="admin-btn-primary px-6 py-3 text-xs uppercase tracking-[0.15em]"
         >
           {saving ? "Sauvegarde..." : isEdit ? "Mettre à jour" : "Créer le point de vente"}
         </button>
         <button
           type="button"
           onClick={() => router.push("/admin/locations")}
-          className="px-6 py-3 bg-white/5 text-white/60 text-xs uppercase tracking-[0.15em] hover:bg-white/10 transition-colors"
+          className="admin-btn-secondary px-6 py-3 text-xs uppercase tracking-[0.15em]"
         >
           Annuler
         </button>

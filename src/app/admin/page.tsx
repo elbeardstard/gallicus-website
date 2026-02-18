@@ -28,9 +28,9 @@ export default async function AdminDashboard() {
   return (
     <div className="flex min-h-screen">
       <AdminSidebar />
-      <main className="flex-1 p-8 bg-[#111]">
+      <main className="admin-main flex-1 p-8">
         <h1 className="text-2xl font-bold mb-1">Tableau de bord</h1>
-        <p className="text-white/40 text-sm mb-8">Bienvenue dans l&apos;administration de Gallicus.</p>
+        <p className="admin-text-muted text-sm mb-8">Bienvenue dans l&apos;administration de Gallicus.</p>
 
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
@@ -38,27 +38,27 @@ export default async function AdminDashboard() {
             <Link
               key={label}
               href={href}
-              className="bg-[#1a1a1a] border border-white/5 p-5 hover:border-[#56a899]/30 transition-colors"
+              className="admin-card admin-card-accent p-5 transition-colors"
             >
-              <p className="text-3xl font-bold text-[#56a899]">{value}</p>
-              <p className="text-white/40 text-xs uppercase tracking-[0.12em] mt-1">{label}</p>
+              <p className="admin-stat-value text-3xl font-bold">{value}</p>
+              <p className="admin-text-muted text-xs uppercase tracking-[0.12em] mt-1">{label}</p>
             </Link>
           ))}
         </div>
 
         {/* Quick actions */}
-        <h2 className="text-sm uppercase tracking-[0.15em] text-white/30 mb-4">Actions rapides</h2>
+        <h2 className="admin-section-heading text-sm uppercase tracking-[0.15em] mb-4">Actions rapides</h2>
         <div className="grid md:grid-cols-3 gap-4">
           {quickActions.map(({ href, label, desc }) => (
             <Link
               key={href}
               href={href}
-              className="bg-[#1a1a1a] border border-white/5 p-6 hover:border-[#56a899]/30 hover:bg-[#1e1e1e] transition-all group"
+              className="admin-card admin-card-accent p-6 transition-all group"
             >
               <p className="font-bold mb-1 group-hover:text-[#56a899] transition-colors">
                 {label}
               </p>
-              <p className="text-white/40 text-sm">{desc}</p>
+              <p className="admin-text-muted text-sm">{desc}</p>
             </Link>
           ))}
         </div>

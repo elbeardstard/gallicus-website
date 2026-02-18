@@ -41,22 +41,19 @@ export default function ContentEditor({ initialContent }: ContentEditorProps) {
     }
   };
 
-  const inputClass =
-    "w-full px-3 py-2.5 bg-white/5 border border-white/10 text-white text-sm focus:border-[#56a899] focus:outline-none transition-colors";
-  const labelClass = "block text-[10px] uppercase tracking-[0.15em] text-white/40 mb-1.5";
+  const inputClass = "admin-input w-full px-3 py-2.5 text-sm";
+  const labelClass = "admin-label block text-[10px] uppercase tracking-[0.15em] mb-1.5";
 
   return (
     <div className="max-w-2xl">
       {/* Tab bar */}
-      <div className="flex gap-0 border-b border-white/10 mb-6">
+      <div className="flex gap-0 admin-divider border-b mb-6">
         {(["about", "contact"] as Tab[]).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={`px-5 py-2.5 text-xs uppercase tracking-[0.15em] border-b-2 -mb-px transition-colors ${
-              tab === t
-                ? "border-[#56a899] text-[#56a899]"
-                : "border-transparent text-white/40 hover:text-white"
+              tab === t ? "admin-tab-active" : "admin-tab-inactive"
             }`}
           >
             {t === "about" ? "À propos" : "Contact & Heures"}
@@ -73,7 +70,7 @@ export default function ContentEditor({ initialContent }: ContentEditorProps) {
                 key={l}
                 onClick={() => setLang(l)}
                 className={`px-4 py-1.5 text-[10px] uppercase tracking-[0.15em] transition-colors ${
-                  lang === l ? "bg-white/10 text-white" : "text-white/30 hover:text-white"
+                  lang === l ? "admin-btn-ghost" : "admin-text-faint hover:text-current"
                 }`}
               >
                 {l === "fr" ? "Français" : "English"}
@@ -81,7 +78,7 @@ export default function ContentEditor({ initialContent }: ContentEditorProps) {
             ))}
           </div>
 
-          <div className="bg-[#1a1a1a] border border-white/5 p-6 space-y-5">
+          <div className="admin-card p-6 space-y-5">
             <div>
               <label className={labelClass}>Description</label>
               <textarea
@@ -119,8 +116,8 @@ export default function ContentEditor({ initialContent }: ContentEditorProps) {
 
       {tab === "contact" && (
         <div className="space-y-6">
-          <div className="bg-[#1a1a1a] border border-white/5 p-6 space-y-5">
-            <h3 className="text-xs uppercase tracking-[0.15em] text-white/30">Adresse</h3>
+          <div className="admin-card p-6 space-y-5">
+            <h3 className="admin-section-heading text-xs uppercase tracking-[0.15em]">Adresse</h3>
             <div>
               <label className={labelClass}>Ligne 1 (rue)</label>
               <input
@@ -140,7 +137,7 @@ export default function ContentEditor({ initialContent }: ContentEditorProps) {
               />
             </div>
 
-            <h3 className="text-xs uppercase tracking-[0.15em] text-white/30 pt-2">Contact</h3>
+            <h3 className="admin-section-heading text-xs uppercase tracking-[0.15em] pt-2">Contact</h3>
             <div>
               <label className={labelClass}>Courriel</label>
               <input
@@ -151,7 +148,7 @@ export default function ContentEditor({ initialContent }: ContentEditorProps) {
               />
             </div>
 
-            <h3 className="text-xs uppercase tracking-[0.15em] text-white/30 pt-2">Heures d&apos;ouverture</h3>
+            <h3 className="admin-section-heading text-xs uppercase tracking-[0.15em] pt-2">Heures d&apos;ouverture</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className={labelClass}>Français</label>
@@ -175,7 +172,7 @@ export default function ContentEditor({ initialContent }: ContentEditorProps) {
               </div>
             </div>
 
-            <h3 className="text-xs uppercase tracking-[0.15em] text-white/30 pt-2">Réseaux sociaux</h3>
+            <h3 className="admin-section-heading text-xs uppercase tracking-[0.15em] pt-2">Réseaux sociaux</h3>
             <div>
               <label className={labelClass}>Instagram URL</label>
               <input
@@ -233,7 +230,7 @@ function SaveBar({
       <button
         onClick={onSave}
         disabled={saving}
-        className="px-6 py-3 bg-[#56a899] text-white text-xs uppercase tracking-[0.15em] hover:bg-[#4a9488] disabled:opacity-40 transition-colors"
+        className="admin-btn-primary px-6 py-3 text-xs uppercase tracking-[0.15em]"
       >
         {saving ? "Sauvegarde..." : "Sauvegarder"}
       </button>

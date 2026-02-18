@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
+    <div className="min-h-screen flex items-center justify-center admin-main">
       <div className="w-full max-w-sm px-8">
         {/* Logo */}
         <div className="flex flex-col items-center mb-10">
@@ -47,9 +47,9 @@ export default function AdminLoginPage() {
             alt="Gallicus"
             width={56}
             height={56}
-            className="w-14 h-14 invert mb-4 opacity-80"
+            className="admin-logo w-14 h-14 mb-4"
           />
-          <p className="text-white/40 text-[10px] uppercase tracking-[0.3em]">
+          <p className="admin-text-muted text-[10px] uppercase tracking-[0.3em]">
             Administration
           </p>
         </div>
@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
           <div>
             <label
               htmlFor="password"
-              className="block text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2"
+              className="admin-label block text-[10px] uppercase tracking-[0.2em] mb-2"
             >
               Mot de passe
             </label>
@@ -69,7 +69,7 @@ export default function AdminLoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               autoFocus
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white placeholder-white/20 focus:border-[#56a899] focus:outline-none transition-colors"
+              className="admin-input w-full px-4 py-3"
               placeholder="••••••••"
             />
           </div>
@@ -81,13 +81,13 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading || !password}
-            className="w-full py-3.5 bg-[#56a899] text-white text-[11px] uppercase tracking-[0.2em] hover:bg-[#4a9488] disabled:opacity-40 transition-colors mt-2"
+            className="admin-btn-primary w-full py-3.5 text-[11px] uppercase tracking-[0.2em] mt-2"
           >
             {loading ? "Connexion..." : "Se connecter"}
           </button>
         </form>
 
-        <p className="text-center text-white/20 text-xs mt-8">
+        <p className="admin-text-faint text-center text-xs mt-8">
           Gallicus &copy; {new Date().getFullYear()}
         </p>
       </div>

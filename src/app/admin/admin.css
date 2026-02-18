@@ -1,0 +1,275 @@
+/* ─── Admin Panel — System-aware light / dark theme ─────────────────────────
+   Dark mode:  OS is in dark mode  → existing design (dark backgrounds)
+   Light mode: OS is in light mode → clean white/grey design
+   The teal accent (#56a899) is shared between both modes.
+────────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Shared */
+  --admin-accent:       #56a899;
+  --admin-accent-hover: #4a9488;
+  --admin-accent-bg:    rgba(86, 168, 153, 0.12);
+  --admin-accent-border:rgba(86, 168, 153, 0.30);
+
+  /* Light defaults */
+  --admin-bg-body:      #f5f5f5;
+  --admin-bg-sidebar:   #ffffff;
+  --admin-bg-main:      #f5f5f5;
+  --admin-bg-card:      #ffffff;
+  --admin-bg-input:     #ffffff;
+  --admin-bg-subtle:    rgba(0,0,0,0.04);
+  --admin-bg-hover:     rgba(0,0,0,0.05);
+
+  --admin-border:       rgba(0,0,0,0.08);
+  --admin-border-strong:rgba(0,0,0,0.14);
+
+  --admin-text:         #111111;
+  --admin-text-muted:   rgba(0,0,0,0.45);
+  --admin-text-faint:   rgba(0,0,0,0.28);
+
+  --admin-shadow:       0 1px 3px rgba(0,0,0,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --admin-bg-body:      #0f0f0f;
+    --admin-bg-sidebar:   #0a0a0a;
+    --admin-bg-main:      #111111;
+    --admin-bg-card:      #1a1a1a;
+    --admin-bg-input:     rgba(255,255,255,0.05);
+    --admin-bg-subtle:    rgba(255,255,255,0.05);
+    --admin-bg-hover:     rgba(255,255,255,0.07);
+
+    --admin-border:       rgba(255,255,255,0.06);
+    --admin-border-strong:rgba(255,255,255,0.12);
+
+    --admin-text:         #ffffff;
+    --admin-text-muted:   rgba(255,255,255,0.40);
+    --admin-text-faint:   rgba(255,255,255,0.25);
+
+    --admin-shadow:       none;
+  }
+}
+
+/* ─── Apply tokens ────────────────────────────────────────────────────────── */
+
+.admin-body {
+  background: var(--admin-bg-body);
+  color: var(--admin-text);
+}
+
+.admin-sidebar {
+  background: var(--admin-bg-sidebar);
+  border-right: 1px solid var(--admin-border);
+  box-shadow: var(--admin-shadow);
+}
+
+.admin-sidebar-header {
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-sidebar-footer {
+  border-top: 1px solid var(--admin-border);
+}
+
+.admin-main {
+  background: var(--admin-bg-main);
+}
+
+.admin-card {
+  background: var(--admin-bg-card);
+  border: 1px solid var(--admin-border);
+  box-shadow: var(--admin-shadow);
+}
+
+.admin-card:hover {
+  border-color: var(--admin-border-strong);
+}
+
+.admin-card-accent:hover {
+  border-color: var(--admin-accent-border);
+}
+
+.admin-input {
+  background: var(--admin-bg-input);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text);
+  transition: border-color 150ms ease;
+}
+
+.admin-input:focus {
+  border-color: var(--admin-accent);
+  outline: none;
+}
+
+.admin-input::placeholder {
+  color: var(--admin-text-faint);
+}
+
+.admin-label {
+  color: var(--admin-text-muted);
+}
+
+.admin-text-muted {
+  color: var(--admin-text-muted);
+}
+
+.admin-text-faint {
+  color: var(--admin-text-faint);
+}
+
+.admin-divider {
+  border-color: var(--admin-border);
+}
+
+/* Nav items */
+.admin-nav-item {
+  color: var(--admin-text-muted);
+  transition: color 150ms ease, background 150ms ease;
+}
+
+.admin-nav-item:hover {
+  color: var(--admin-text);
+  background: var(--admin-bg-subtle);
+}
+
+.admin-nav-item-active {
+  background: var(--admin-accent-bg);
+  color: var(--admin-accent);
+}
+
+/* Buttons */
+.admin-btn-primary {
+  background: var(--admin-accent);
+  color: #ffffff;
+  transition: background 150ms ease;
+}
+.admin-btn-primary:hover:not(:disabled) {
+  background: var(--admin-accent-hover);
+}
+.admin-btn-primary:disabled {
+  opacity: 0.4;
+}
+
+.admin-btn-secondary {
+  background: var(--admin-bg-subtle);
+  color: var(--admin-text-muted);
+  border: 1px solid var(--admin-border);
+  transition: background 150ms ease, color 150ms ease;
+}
+.admin-btn-secondary:hover {
+  background: var(--admin-bg-hover);
+  color: var(--admin-text);
+}
+
+.admin-btn-ghost {
+  background: var(--admin-bg-subtle);
+  color: var(--admin-text-muted);
+  transition: background 150ms ease, color 150ms ease;
+}
+.admin-btn-ghost:hover {
+  background: var(--admin-bg-hover);
+  color: var(--admin-text);
+}
+
+/* Tag / badge */
+.admin-tag-accent {
+  background: var(--admin-accent-bg);
+  color: var(--admin-accent);
+  border: 1px solid var(--admin-accent-border);
+}
+
+.admin-tag-neutral {
+  background: var(--admin-bg-subtle);
+  color: var(--admin-text-muted);
+  border: 1px solid var(--admin-border);
+}
+
+/* Tab */
+.admin-tab-active {
+  border-bottom: 2px solid var(--admin-accent);
+  color: var(--admin-accent);
+}
+
+.admin-tab-inactive {
+  border-bottom: 2px solid transparent;
+  color: var(--admin-text-muted);
+}
+.admin-tab-inactive:hover {
+  color: var(--admin-text);
+}
+
+/* Stat card */
+.admin-stat-value {
+  color: var(--admin-accent);
+}
+
+/* Select */
+select.admin-input {
+  background: var(--admin-bg-input);
+}
+
+/* File input */
+.admin-file-input {
+  color: var(--admin-text-muted);
+}
+.admin-file-input::file-selector-button {
+  background: var(--admin-bg-subtle);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text);
+  padding: 0.4rem 1rem;
+  margin-right: 0.75rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+.admin-file-input::file-selector-button:hover {
+  background: var(--admin-bg-hover);
+}
+
+/* Checkbox accent */
+.admin-checkbox {
+  accent-color: var(--admin-accent);
+}
+
+/* Logo invert: dark=invert, light=normal */
+.admin-logo {
+  filter: invert(1);
+  opacity: 0.7;
+}
+@media (prefers-color-scheme: light) {
+  .admin-logo {
+    filter: none;
+    opacity: 1;
+  }
+}
+
+/* Section heading */
+.admin-section-heading {
+  color: var(--admin-text-faint);
+}
+
+/* Image border */
+.admin-img-border {
+  border: 1px solid var(--admin-border);
+}
+
+/* Delete button */
+.admin-btn-delete {
+  background: var(--admin-bg-subtle);
+  color: rgba(248, 113, 113, 0.6);
+  transition: background 150ms ease, color 150ms ease;
+}
+.admin-btn-delete:hover {
+  color: rgb(248, 113, 113);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+/* Placeholder empty state */
+.admin-empty {
+  background: var(--admin-bg-card);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text-faint);
+}
