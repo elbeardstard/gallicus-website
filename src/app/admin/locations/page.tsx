@@ -44,7 +44,7 @@ export default async function AdminLocationsPage() {
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-sm">{loc.name}</p>
                   <p className="text-white/40 text-xs truncate">
-                    {loc.address}, {loc.city} · {loc.lat.toFixed(4)}, {loc.lng.toFixed(4)}
+                    {loc.address}, {loc.city} · {Number(loc.lat).toFixed(4)}, {Number(loc.lng).toFixed(4)}
                   </p>
                 </div>
 
