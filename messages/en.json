@@ -65,6 +65,7 @@
       },
       {
         "id": "3",
+        "style": "West Coast IPA",
         "description": "West Coast IPA hopped with Mosaic, Centennial, Columbus and Nugget. Dry with fruity and resinous aromas.",
         "tastingNotes": [
           "Resinous",
@@ -75,6 +76,7 @@
       },
       {
         "id": "4",
+        "style": "North American IPA",
         "description": "Our signature IPA with tropical and resinous notes. Well-balanced bitterness with a dry finish.",
         "tastingNotes": [
           "Tropical",
@@ -103,6 +105,7 @@
     "directions": "Directions",
     "pivohubDesc": "Find our beers near you",
     "untappdDesc": "Community check-ins and reviews",
+    "filterAll": "All",
     "types": {
       "brewery": "Brewery",
       "bar": "Bar",

@@ -31,6 +31,7 @@ export default function AvailabilityMap() {
         <div className="mb-10 overflow-hidden border border-foreground/5">
           <RetailersMap
             legend={t("mapLegend")}
+            filterAll={t("filterAll")}
             typeLabels={{
               brewery: t("types.brewery"),
               bar: t("types.bar"),

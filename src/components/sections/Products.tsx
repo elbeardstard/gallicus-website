@@ -1,10 +1,11 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useMessages } from "next-intl";
 import Image from "next/image";
 import { BeerCard, ScrollReveal } from "@/components/ui";
 
-// Static beer data — names, styles, ABV, images, URLs don't change by locale
+// Static beer data — names, ABV, images, URLs don't change by locale
+// style: null means it comes from the translation file (locale-specific)
 const beerBase = [
   {
     id: "1",
@@ -29,7 +30,7 @@ const beerBase = [
   {
     id: "3",
     name: "Syn",
-    style: "West Coast IPA",
+    style: null, // locale-specific — see messages/*.json beers[2].style
     abv: 6.5,
     image: "/images/labels/syn.png",
     isCore: true,
@@ -39,7 +40,7 @@ const beerBase = [
   {
     id: "4",
     name: "IPA",
-    style: "IPA Nord-Américaine",
+    style: null, // locale-specific — see messages/*.json beers[3].style
     abv: 6.5,
     image: "/images/labels/ipa.png",
     isCore: true,
@@ -50,13 +51,22 @@ const beerBase = [
 
 export default function Products() {
   const t = useTranslations("beers");
+  const messages = useMessages();
 
-  // Merge static data with translated descriptions and tasting notes
-  const beers = beerBase.map((beer, i) => ({
-    ...beer,
-    description: t(`beers.${i}.description`),
-    tastingNotes: [0, 1, 2, 3].map((j) => t(`beers.${i}.tastingNotes.${j}`)),
-  }));
+  // Raw beer translation data for arrays and optional fields
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const rawBeers: any[] = (messages as any)?.beers?.beers ?? [];
+
+  // Merge static data with translated descriptions, styles (where locale-specific), and tasting notes
+  const beers = beerBase.map((beer, i) => {
+    const raw = rawBeers[i] ?? {};
+    return {
+      ...beer,
+      style: beer.style ?? (raw.style as string | undefined) ?? "",
+      description: t(`beers.${i}.description`),
+      tastingNotes: Array.isArray(raw.tastingNotes) ? (raw.tastingNotes as string[]) : [],
+    };
+  });
 
   return (
     <section id="beers" className="section bg-background">
@@ -91,7 +101,7 @@ export default function Products() {
         <ScrollReveal variant="fadeUp" delay={0.2}>
           <div className="mt-16 md:mt-20 text-center">
             <a
-              href="https://untappd.com/Gallicusadmin/beer"
+              href="https://untappd.com/v/gallicus-brasserie-artisanale/8707258"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-5 px-8 py-5 bg-beige/50 border border-foreground/5 hover:border-turquoise/50 hover:bg-beige transition-all duration-300"

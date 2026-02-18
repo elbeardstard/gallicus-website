@@ -5,6 +5,7 @@ import Image from "next/image";
 
 export default function Footer() {
   const t = useTranslations("footer");
+  const tContact = useTranslations("contact");
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
@@ -40,7 +41,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="font-heading text-sm uppercase tracking-wider mb-4">
-              Contact
+              {tContact("title")}
             </h4>
             <div className="space-y-2 text-sm text-background/60">
               <p>670 rue Auguste-Mondoux #4</p>
@@ -72,7 +73,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://untappd.com/Gallicusadmin"
+                href="https://untappd.com/v/gallicus-brasserie-artisanale/8707258"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center border border-background/20 hover:border-turquoise transition-colors overflow-hidden"
