@@ -68,6 +68,12 @@ export const LOCATIONS_FALLBACK: DbLocation[] = [
   },
 ];
 
+// ─── Coerce numeric fields returned as strings by Neon ────────────────────────
+
+function coerce(row: DbLocation): DbLocation {
+  return { ...row, lat: Number(row.lat), lng: Number(row.lng) };
+}
+
 // ─── Public fetch ─────────────────────────────────────────────────────────────
 
 export const getLocations = cache(async (): Promise<DbLocation[]> => {
@@ -75,7 +81,7 @@ export const getLocations = cache(async (): Promise<DbLocation[]> => {
     SELECT * FROM locations ORDER BY sort_order ASC, created_at ASC
   `;
   if (!rows || rows.length === 0) return LOCATIONS_FALLBACK;
-  return rows;
+  return rows.map(coerce);
 });
 
 // ─── Admin fetch (no cache) ───────────────────────────────────────────────────
@@ -84,12 +90,12 @@ export async function getAllLocationsRaw(): Promise<DbLocation[]> {
   const rows = await query<DbLocation>`
     SELECT * FROM locations ORDER BY sort_order ASC, created_at ASC
   `;
-  return rows ?? LOCATIONS_FALLBACK;
+  return rows ? rows.map(coerce) : LOCATIONS_FALLBACK;
 }
 
 export async function getLocationByIdRaw(id: string): Promise<DbLocation | null> {
   const rows = await query<DbLocation>`
     SELECT * FROM locations WHERE id = ${id} LIMIT 1
   `;
-  return rows?.[0] ?? null;
+  return rows?.[0] ? coerce(rows[0]) : null;
 }
