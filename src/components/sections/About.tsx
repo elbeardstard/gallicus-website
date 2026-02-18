@@ -1,11 +1,17 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { ScrollReveal } from "@/components/ui";
+import { getSiteContent } from "@/lib/data/content";
+import { getLocale } from "next-intl/server";
 
-export default function About() {
-  const t = useTranslations("about");
+export default async function About() {
+  const locale = (await getLocale()) as "fr" | "en";
+  const t = await getTranslations("about");
+  const content = await getSiteContent();
+
+  // DB values override translation fallbacks
+  const description = content[`about.description.${locale}`] || t("description");
+  const philosophy = content[`about.philosophy.${locale}`] || t("philosophy");
 
   return (
     <section id="about" className="section bg-beige relative overflow-hidden">
@@ -28,6 +34,9 @@ export default function About() {
               <p className="font-heading text-xs uppercase tracking-[0.2em] text-turquoise mb-4">
                 {t("subtitle")}
               </p>
+              <p className="font-display-italic text-3xl md:text-4xl text-foreground/30 mb-2 leading-none">
+                {t("italicLine")}
+              </p>
               <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[0.95]">
                 {t("title")}
               </h2>
@@ -42,11 +51,9 @@ export default function About() {
           <ScrollReveal variant="fadeLeft" delay={0.15}>
             <div className="space-y-6">
               <p className="text-lg md:text-xl leading-relaxed font-light">
-                {t("description")}
+                {description}
               </p>
-              <p className="text-foreground/60 leading-relaxed">
-                {t("philosophy")}
-              </p>
+              <p className="text-foreground/60 leading-relaxed">{philosophy}</p>
             </div>
           </ScrollReveal>
         </div>
@@ -60,7 +67,7 @@ export default function About() {
                   2020
                 </p>
                 <p className="mt-3 font-heading text-[10px] md:text-xs uppercase tracking-[0.2em] text-foreground/60">
-                  Fondée
+                  {t("stats.founded")}
                 </p>
               </div>
             </ScrollReveal>
@@ -70,7 +77,7 @@ export default function About() {
                   100%
                 </p>
                 <p className="mt-3 font-heading text-[10px] md:text-xs uppercase tracking-[0.2em] text-foreground/60">
-                  Artisanale
+                  {t("stats.craft")}
                 </p>
               </div>
             </ScrollReveal>
@@ -80,7 +87,7 @@ export default function About() {
                   QC
                 </p>
                 <p className="mt-3 font-heading text-[10px] md:text-xs uppercase tracking-[0.2em] text-foreground/60">
-                  Gatineau
+                  {t("stats.location")}
                 </p>
               </div>
             </ScrollReveal>

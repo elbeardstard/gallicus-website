@@ -11,6 +11,7 @@ export interface Beer {
   isFeatured: boolean;
   untappdUrl?: string;
   rating?: number;
+  tastingNotes?: string[];
 }
 
 export interface Location {

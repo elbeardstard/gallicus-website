@@ -13,22 +13,79 @@
   "hero": {
     "tagline": "Craft Brewery",
     "location": "Gatineau, QC",
-    "scrollDown": "Scroll"
+    "scrollDown": "Scroll",
+    "cta": "Discover our beers"
   },
   "about": {
     "title": "About",
     "subtitle": "Craft Brewery",
     "description": "Gallicus is a craft brewery located in Gatineau, Quebec. We brew beers with character, passion, and creativity, in small batches to ensure quality and freshness in every product.",
-    "philosophy": "Our philosophy is simple: create authentic beers that reflect our terroir and our love of the craft. Each recipe is carefully developed using quality ingredients to deliver unique and memorable flavors."
+    "philosophy": "Our philosophy is simple: create authentic beers that reflect our terroir and our love of the craft. Each recipe is carefully developed using quality ingredients to deliver unique and memorable flavors.",
+    "stats": {
+      "founded": "Founded",
+      "craft": "Craft",
+      "location": "Gatineau"
+    },
+    "italicLine": "our story"
   },
   "beers": {
     "title": "Our Beers",
+    "subtitle": "Our Creations",
     "filterAll": "All",
     "filterCore": "Core",
     "filterSeasonal": "Seasonal",
     "abv": "ABV",
     "viewDetails": "View Details",
-    "emptyState": "No beers available at the moment."
+    "emptyState": "No beers available at the moment.",
+    "featured": "Featured",
+    "core": "Classic",
+    "viewOnUntappd": "View on Untappd",
+    "viewAll": "See all our beers",
+    "viewAllSub": "New releases, ratings & check-ins",
+    "beers": [
+      {
+        "id": "1",
+        "description": "Double NEIPA hopped with Amarillo, Simcoe, Chinook and Idaho 7. A beautiful aromatic complexity of tropical fruits.",
+        "tastingNotes": [
+          "Tropical",
+          "Mango",
+          "Passion Fruit",
+          "Smooth"
+        ]
+      },
+      {
+        "id": "2",
+        "description": "Our light and refreshing Mexican lager. Perfect for hot days or to pair with tacos.",
+        "tastingNotes": [
+          "Grain",
+          "Lemon",
+          "Light",
+          "Refreshing"
+        ]
+      },
+      {
+        "id": "3",
+        "style": "West Coast IPA",
+        "description": "West Coast IPA hopped with Mosaic, Centennial, Columbus and Nugget. Dry with fruity and resinous aromas.",
+        "tastingNotes": [
+          "Resinous",
+          "Citrus",
+          "Pine",
+          "Bitter"
+        ]
+      },
+      {
+        "id": "4",
+        "style": "North American IPA",
+        "description": "Our signature IPA with tropical and resinous notes. Well-balanced bitterness with a dry finish.",
+        "tastingNotes": [
+          "Tropical",
+          "Resinous",
+          "Floral",
+          "Bitter"
+        ]
+      }
+    ]
   },
   "newReleases": {
     "title": "New Releases",
@@ -41,7 +98,16 @@
     "subtitle": "Points of Sale",
     "viewMap": "View Map",
     "viewList": "View List",
+    "mapLegend": "Legend",
+    "taproom": "Taproom",
+    "brewerName": "Gallicus - Craft Brewery",
+    "hours": "Open: Thursday - Sunday",
+    "directions": "Directions",
+    "pivohubDesc": "Find our beers near you",
+    "untappdDesc": "Community check-ins and reviews",
+    "filterAll": "All",
     "types": {
+      "brewery": "Brewery",
       "bar": "Bar",
       "retail": "Retailer",
       "restaurant": "Restaurant"
@@ -67,6 +133,7 @@
     }
   },
   "footer": {
+    "tagline": "Craft Brewery",
     "rights": "All rights reserved",
     "backToTop": "Back to top",
     "followUs": "Follow Us"

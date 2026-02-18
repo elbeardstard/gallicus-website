@@ -117,7 +117,7 @@ export default function Hero() {
           variants={fadeUp}
           transition={transition(0.6)}
         >
-          Brasserie Artisanale
+          {t("tagline")}
         </motion.p>
 
         {/* Decorative divider */}
@@ -151,7 +151,7 @@ export default function Hero() {
 
         {/* Location */}
         <motion.p
-          className="text-white/60 tracking-widest text-sm uppercase"
+          className="text-white/60 tracking-widest text-sm uppercase mb-10"
           initial={prefersReducedMotion ? "visible" : "hidden"}
           animate="visible"
           variants={fadeIn}
@@ -159,6 +159,27 @@ export default function Hero() {
         >
           {t("location")}
         </motion.p>
+
+        {/* CTA */}
+        <motion.a
+          href="#beers"
+          onClick={(e) => {
+            e.preventDefault();
+            document.querySelector("#beers")?.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="inline-flex items-center gap-3 font-heading text-[11px] uppercase tracking-[0.2em] px-7 py-3.5 border border-white/40 text-white/90 hover:bg-white hover:text-foreground transition-all duration-300"
+          initial={prefersReducedMotion ? "visible" : "hidden"}
+          animate="visible"
+          variants={fadeUp}
+          transition={transition(1.1)}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          {t("cta")}
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.a>
       </div>
 
       {/* Scroll indicator */}

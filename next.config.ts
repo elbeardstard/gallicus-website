@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         hostname: "assets.untappd.com",
         pathname: "/site/**",
       },
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+      },
     ],
   },
 };
