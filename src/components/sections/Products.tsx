@@ -1,72 +1,12 @@
-"use client";
-
-import { useTranslations, useMessages } from "next-intl";
+import { getTranslations, getLocale } from "next-intl/server";
 import Image from "next/image";
 import { BeerCard, ScrollReveal } from "@/components/ui";
+import { getBeers } from "@/lib/data/beers";
 
-// Static beer data — names, ABV, images, URLs don't change by locale
-// style: null means it comes from the translation file (locale-specific)
-const beerBase = [
-  {
-    id: "1",
-    name: "Double Aura",
-    style: "IPA - New England / Hazy",
-    abv: 7.8,
-    image: "https://assets.untappd.com/site/beer_logos/beer-3683191_cf7dc_sm.jpeg",
-    isCore: true,
-    isFeatured: true,
-    untappdUrl: "https://untappd.com/b/brasserie-artisanale-gallicus-double-aura/3683191",
-  },
-  {
-    id: "2",
-    name: "Lucha Libre",
-    style: "Lager - Mexican",
-    abv: 4.0,
-    image: null,
-    isCore: true,
-    isFeatured: false,
-    untappdUrl: "https://untappd.com/b/brasserie-artisanale-gallicus-lucha-libre/5377460",
-  },
-  {
-    id: "3",
-    name: "Syn",
-    style: null, // locale-specific — see messages/*.json beers[2].style
-    abv: 6.5,
-    image: "/images/labels/syn.png",
-    isCore: true,
-    isFeatured: true,
-    untappdUrl: "https://untappd.com/b/brasserie-artisanale-gallicus-syn-bleue-west-coast-ipa/3953337",
-  },
-  {
-    id: "4",
-    name: "IPA",
-    style: null, // locale-specific — see messages/*.json beers[3].style
-    abv: 6.5,
-    image: "/images/labels/ipa.png",
-    isCore: true,
-    isFeatured: true,
-    untappdUrl: "https://untappd.com/Gallicusadmin/beer",
-  },
-];
-
-export default function Products() {
-  const t = useTranslations("beers");
-  const messages = useMessages();
-
-  // Raw beer translation data for arrays and optional fields
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const rawBeers: any[] = (messages as any)?.beers?.beers ?? [];
-
-  // Merge static data with translated descriptions, styles (where locale-specific), and tasting notes
-  const beers = beerBase.map((beer, i) => {
-    const raw = rawBeers[i] ?? {};
-    return {
-      ...beer,
-      style: beer.style ?? (raw.style as string | undefined) ?? "",
-      description: t(`beers.${i}.description`),
-      tastingNotes: Array.isArray(raw.tastingNotes) ? (raw.tastingNotes as string[]) : [],
-    };
-  });
+export default async function Products() {
+  const locale = (await getLocale()) as "fr" | "en";
+  const t = await getTranslations("beers");
+  const beers = await getBeers(locale);
 
   return (
     <section id="beers" className="section bg-background">
@@ -121,8 +61,18 @@ export default function Products() {
                   {t("viewAllSub")}
                 </p>
               </div>
-              <svg className="w-4 h-4 text-foreground/30 group-hover:text-turquoise group-hover:translate-x-1 transition-all ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <svg
+                className="w-4 h-4 text-foreground/30 group-hover:text-turquoise group-hover:translate-x-1 transition-all ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </a>
           </div>

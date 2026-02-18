@@ -1,11 +1,17 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { ScrollReveal } from "@/components/ui";
+import { getSiteContent } from "@/lib/data/content";
+import { getLocale } from "next-intl/server";
 
-export default function About() {
-  const t = useTranslations("about");
+export default async function About() {
+  const locale = (await getLocale()) as "fr" | "en";
+  const t = await getTranslations("about");
+  const content = await getSiteContent();
+
+  // DB values override translation fallbacks
+  const description = content[`about.description.${locale}`] || t("description");
+  const philosophy = content[`about.philosophy.${locale}`] || t("philosophy");
 
   return (
     <section id="about" className="section bg-beige relative overflow-hidden">
@@ -45,11 +51,9 @@ export default function About() {
           <ScrollReveal variant="fadeLeft" delay={0.15}>
             <div className="space-y-6">
               <p className="text-lg md:text-xl leading-relaxed font-light">
-                {t("description")}
+                {description}
               </p>
-              <p className="text-foreground/60 leading-relaxed">
-                {t("philosophy")}
-              </p>
+              <p className="text-foreground/60 leading-relaxed">{philosophy}</p>
             </div>
           </ScrollReveal>
         </div>

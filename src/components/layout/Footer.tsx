@@ -1,16 +1,20 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
+import { getSiteContent } from "@/lib/data/content";
+import ScrollToTopButton from "./FooterClient";
 
-export default function Footer() {
-  const t = useTranslations("footer");
-  const tContact = useTranslations("contact");
+export default async function Footer() {
+  const t = await getTranslations("footer");
+  const tContact = await getTranslations("contact");
+  const content = await getSiteContent();
   const currentYear = new Date().getFullYear();
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const address1 = content["contact.address.line1"] ?? "670 rue Auguste-Mondoux #4";
+  const address2 = content["contact.address.line2"] ?? "Gatineau, QC, Canada";
+  const email = content["contact.email"] ?? "info@gallicus.ca";
+  const instagramUrl = content["social.instagram"] ?? "https://instagram.com/brasserie_gallicus";
+  const untappdUrl =
+    content["social.untappd"] ?? "https://untappd.com/v/gallicus-brasserie-artisanale/8707258";
 
   return (
     <footer className="bg-foreground text-background py-12 md:py-16">
@@ -33,9 +37,7 @@ export default function Footer() {
                 </p>
               </div>
             </div>
-            <p className="text-background/50 text-sm">
-              Gatineau, QC
-            </p>
+            <p className="text-background/50 text-sm">Gatineau, QC</p>
           </div>
 
           {/* Contact */}
@@ -44,13 +46,13 @@ export default function Footer() {
               {tContact("title")}
             </h4>
             <div className="space-y-2 text-sm text-background/60">
-              <p>670 rue Auguste-Mondoux #4</p>
-              <p>Gatineau, QC, Canada</p>
+              <p>{address1}</p>
+              <p>{address2}</p>
               <a
-                href="mailto:info@gallicus.ca"
+                href={`mailto:${email}`}
                 className="block hover:text-turquoise transition-colors"
               >
-                info@gallicus.ca
+                {email}
               </a>
             </div>
           </div>
@@ -62,7 +64,7 @@ export default function Footer() {
             </h4>
             <div className="flex gap-4">
               <a
-                href="https://instagram.com/brasserie_gallicus"
+                href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center border border-background/20 hover:border-turquoise hover:text-turquoise transition-colors"
@@ -73,7 +75,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://untappd.com/v/gallicus-brasserie-artisanale/8707258"
+                href={untappdUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center border border-background/20 hover:border-turquoise transition-colors overflow-hidden"
@@ -96,15 +98,7 @@ export default function Footer() {
           <p className="text-sm text-background/40">
             &copy; {currentYear} Gallicus. {t("rights")}.
           </p>
-          <button
-            onClick={scrollToTop}
-            className="font-heading text-sm uppercase tracking-wider text-background/40 hover:text-turquoise transition-colors flex items-center gap-2"
-          >
-            {t("backToTop")}
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
-          </button>
+          <ScrollToTopButton label={t("backToTop")} />
         </div>
       </div>
     </footer>

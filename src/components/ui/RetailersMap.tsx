@@ -15,7 +15,7 @@ interface Location {
   coordinates: [number, number]; // [lng, lat]
 }
 
-const locations: Location[] = [
+const HARDCODED_LOCATIONS: Location[] = [
   {
     id: "gallicus",
     name: "Gallicus — Brasserie Artisanale",
@@ -66,6 +66,7 @@ const typeColors: Record<Location["type"], string> = {
 };
 
 interface RetailersMapProps {
+  locations?: Location[]; // passed from server component; falls back to HARDCODED_LOCATIONS
   legend: string;
   filterAll: string;
   typeLabels: Record<Location["type"], string>;
@@ -73,11 +74,13 @@ interface RetailersMapProps {
 
 type FilterType = Location["type"] | "all";
 
-export default function RetailersMap({ legend, filterAll, typeLabels }: RetailersMapProps) {
+export default function RetailersMap({ locations: locationsProp, legend, filterAll, typeLabels }: RetailersMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<{ marker: mapboxgl.Marker; loc: Location }[]>([]);
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+
+  const locations = locationsProp ?? HARDCODED_LOCATIONS;
 
   // Initialize map once
   useEffect(() => {
